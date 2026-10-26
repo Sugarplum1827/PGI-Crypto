@@ -1,0 +1,27 @@
+{
+  "benchmark": "PGI-Crypto 2048-bit Strict scope requests and Experimental key generation",
+  "modulus_bits": 2048,
+  "requested_trials_per_policy": 1000,
+  "max_attempts_per_experimental_trial": 50,
+  "rng_mode": "secure",
+  "private_key_material_persisted": false,
+  "summaries": [
+    {
+      "policy": "strict_spec",
+      "requested_trials": 1000,
+      "successful_key_pairs": 0,
+      "statuses": {
+        "blocked_outside_validated_range": 1000
+      },
+      "blocked_before_candidate_generation": 1000,
+      "candidate_attempts_per_trial_cap": 50,
+      "mean_request_or_generation_seconds": 3.1867300684098156e-05,
+      "median_request_or_generation_seconds": 2.3200002033263445e-05,
+      "p95_request_or_generation_seconds": 7.919996278360486e-05,
+      "model_load_seconds_once_excluded_from_trial_timings": 0.0,
+      "private_key_material_persisted": false,
+      "trial_file": "strict_scope_requests.csv",
+      "interpretation": "Strict requests are deterministic validated-range gate checks; blocked requests are not independent key-generation trials."
+    }
+  ]
+}

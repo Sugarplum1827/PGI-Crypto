@@ -1,0 +1,16 @@
+{
+  "status": "blocked_outside_validated_range",
+  "policy": "strict_spec",
+  "modulus_bits": 2048,
+  "requested_trials": 1000,
+  "successful_key_pairs": 0,
+  "blocked_before_candidate_generation": 1000,
+  "mean_request_seconds": 3.1867300684098156e-05,
+  "p95_request_seconds": 7.919996278360486e-05,
+  "reason": "policy 'strict_spec' requires the validated range (p_mid <= 10^12 (newly trained range-spanning model support)) but 1024-bit primes reach 1025 bits",
+  "model_track": "label_adviser_classical_4class",
+  "model_support_max": 999990307727,
+  "model_sha256": "407af53240a685d0c7ae7bea78b3101f23ee2b90ed8e5dad3dcac5da2d22cbc9",
+  "private_key_material_persisted": false,
+  "interpretation": "These are deterministic scope-gate requests, not independent key-generation trials. Strict stops before drawing RSA-2048 candidates because the factors are outside the rebuilt model support."
+}

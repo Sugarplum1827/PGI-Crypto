@@ -1,0 +1,35 @@
+{
+  "system_version": "0.3.0",
+  "model_track": "label_adviser_classical_4class",
+  "artifact": "rebuilt_adviser_classical_4class_xgboost.json",
+  "sha256": "407af53240a685d0c7ae7bea78b3101f23ee2b90ed8e5dad3dcac5da2d22cbc9",
+  "classes": [
+    "CC",
+    "MA",
+    "MGV",
+    "NONE"
+  ],
+  "feature_count": 22,
+  "window_gaps": 100,
+  "observed_p_mid_min": 233,
+  "observed_p_mid_max": 999990307727,
+  "training_sample_rows": 75701,
+  "note": "Research inference artifact only. It classifies heuristic labels in the sampled p_mid <= 10^12 domain. MGV precision is very low; it is not validated for approving cryptographic keys or for RSA-size prime factors.",
+  "training_rows_after_smote": 221540,
+  "training_seed": 20266026,
+  "training_device": "CUDA XGBoost on NVIDIA GeForce RTX 4050 Laptop GPU",
+  "training_dataset_file": "data/processed/windows_1e12_model_sample10000.parquet",
+  "training_dataset_sha256": "d921a95b70c07897eff50f56ec5e9e48b2a8306e2e45fbeb77e3e5dce02ae118",
+  "source_prime_gap_stream_file": "data/raw/prime_gaps_1e12.u16",
+  "source_prime_gap_stream_sha256": "5f517070df35881a392be0791d03b4b9c6d576771f5e9709544f9a11855ff791",
+  "evaluation": {
+    "method": "5-fold StratifiedGroupKFold, spatial groups=1000 windows, purge=2 windows",
+    "weighted": true,
+    "xgboost_accuracy_mean": 0.8404725797642457,
+    "xgboost_macro_f1_mean": 0.5401274142447337,
+    "xgboost_balanced_accuracy_mean": 0.7174011923717718,
+    "mgv_precision": 0.00012925499563760118,
+    "mgv_recall": 0.5678728070175438,
+    "chronological_holdout": true
+  }
+}

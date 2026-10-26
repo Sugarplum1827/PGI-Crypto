@@ -1,0 +1,11 @@
+altair
+cryptography
+joblib
+numpy
+pandas
+pyarrow
+scikit-learn
+scipy
+shap
+streamlit
+xgboost

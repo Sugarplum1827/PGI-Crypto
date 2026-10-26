@@ -1,0 +1,29 @@
+{
+  "benchmark": "PGI-Crypto 2048-bit Strict scope requests and Experimental key generation",
+  "modulus_bits": 2048,
+  "requested_trials_per_policy": 1000,
+  "max_attempts_per_experimental_trial": 8,
+  "rng_mode": "secure",
+  "private_key_material_persisted": false,
+  "summaries": [
+    {
+      "policy": "experimental_rule_gate",
+      "requested_trials": 1000,
+      "successful_key_pairs": 1000,
+      "statuses": {
+        "success": 1000
+      },
+      "blocked_before_candidate_generation": 0,
+      "candidate_attempts_per_trial_cap": 8,
+      "mean_request_or_generation_seconds": 24.891688186600746,
+      "median_request_or_generation_seconds": 21.07349989999784,
+      "p95_request_or_generation_seconds": 50.39366040000459,
+      "model_load_seconds_once_excluded_from_trial_timings": 6.567480799974874,
+      "model_track": "label_adviser_classical_4class",
+      "model_sha256": "407af53240a685d0c7ae7bea78b3101f23ee2b90ed8e5dad3dcac5da2d22cbc9",
+      "private_key_material_persisted": false,
+      "trial_file": "experimental_key_generation_trials.csv",
+      "interpretation": "Experimental runs generate keys with the secure OS random source and validate them, but the out-of-range ML gate is reported rather than enforced. This is not ML-validated key generation."
+    }
+  ]
+}

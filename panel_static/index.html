@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2b">
+  <title>PGI-Crypto | Research System</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="PGI-Crypto overview">
+        <span class="brand-mark">PG</span>
+        <span><strong>PGI-Crypto</strong><small>Research System</small></span>
+      </a>
+      <div class="side-label">PRESENTATION</div>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-link active" data-page="overview"><span class="nav-icon">◫</span>Overview</button>
+        <button class="nav-link" data-page="window-lab"><span class="nav-icon">⌕</span>Window analysis</button>
+        <button class="nav-link" data-page="model-results"><span class="nav-icon">▥</span>Model results</button>
+        <button class="nav-link" data-page="crypto-boundary"><span class="nav-icon">⌑</span>Crypto benchmarks</button>
+        <button class="nav-link" data-page="methods"><span class="nav-icon">≡</span>Methods & evidence</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="local-chip"><span class="pulse-dot"></span>Running on this computer</div>
+        <p>Panel demonstration<br>Research prototype · v1.0.0</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>PGI-CRYPTO</span><b>/</b><span id="current-section">OVERVIEW</span></div>
+        <div class="topbar-status"><span class="status-dot"></span><span id="system-status">Loading study records</span></div>
+      </header>
+
+      <section class="page active" id="page-overview">
+        <div class="page-heading">
+          <div><div class="eyebrow">THESIS DEMONSTRATION SYSTEM</div><h1>Prime-gap intelligence, made inspectable.</h1>
+          <p class="lead">An evidence-backed workspace for exploring prime-gap regimes, model performance, and the limits of PGI-Crypto.</p></div>
+          <div class="range-pill"><span class="range-dot"></span>Study range <strong>up to 10<sup>12</sup></strong></div>
+        </div>
+
+        <div class="notice notice-blue"><span class="notice-icon">i</span><div><strong>Research boundary</strong><p>This system classifies prime-gap windows. A prediction is not a security score and does not approve a cryptographic key. The strict PGI key-generation check blocks out-of-range RSA-2048 use.</p></div><button class="text-button" data-page="crypto-boundary">See benchmark boundary <span>→</span></button></div>
+
+        <div class="metric-grid">
+          <article class="metric-card"><div class="metric-label">Consecutive-prime gaps</div><div class="metric-value" id="metric-gaps">—</div><div class="metric-foot">Generated through the inclusive study limit</div><span class="metric-orb orb-blue">∿</span></article>
+          <article class="metric-card"><div class="metric-label">Possible overlapping windows</div><div class="metric-value" id="metric-windows">—</div><div class="metric-foot">100 gaps per window · stride 50</div><span class="metric-orb orb-violet">▦</span></article>
+          <article class="metric-card"><div class="metric-label">Model evaluation rows</div><div class="metric-value" id="metric-rows">—</div><div class="metric-foot">Sampled rows, population weighted</div><span class="metric-orb orb-green">◉</span></article>
+          <article class="metric-card"><div class="metric-label">Best weighted macro-F1</div><div class="metric-value" id="metric-f1">—</div><div class="metric-foot">Grouped five-fold comparison</div><span class="metric-orb orb-amber">↗</span></article>
+        </div>
+
+        <div class="content-grid overview-grid">
+          <article class="panel-card model-card">
+            <div class="card-heading"><div><div class="eyebrow">CLASSIFIER COMPARISON</div><h2>What the models learned</h2></div><button class="quiet-button" data-page="model-results">View all results <span>→</span></button></div>
+            <div id="overview-model-bars" class="compact-bars"><div class="loading-line"></div><div class="loading-line short"></div></div>
+            <div class="chart-caption"><span class="legend-dot blue"></span>Weighted macro-F1 <span class="caption-note">Four-class adviser label track</span></div>
+          </article>
+          <article class="panel-card hardware-card">
+            <div class="eyebrow">COMPUTE ENVIRONMENT</div><h2>GPU-backed model training</h2>
+            <div class="gpu-badge"><span class="gpu-chip">GPU</span><div><strong id="gpu-name">—</strong><small id="gpu-state">CUDA status loading</small></div><span class="checkmark" id="gpu-check">···</span></div>
+            <div class="hardware-meta"><div><span>Model training</span><strong id="gpu-fit">—</strong></div><div><span>Device use</span><strong>XGBoost only</strong></div></div>
+            <p class="small-note">Random Forest and MLP comparisons ran on CPU. GPU acceleration does not remove the rare-class or cryptographic-range limits.</p>
+          </article>
+        </div>
+
+        <article class="panel-card highlight-card">
+          <div class="highlight-icon">!</div><div class="highlight-copy"><div class="eyebrow">KEY FINDING</div><h2>MGV recall is not the same as reliable MGV detection.</h2><p>The best model recovers some MGV windows, but its precision is near zero because MGV is extremely rare. That result is reported as a limitation, not hidden behind overall accuracy.</p></div><div class="highlight-stat"><strong id="mgv-precision">—</strong><span>MGV precision</span></div><div class="highlight-stat"><strong id="mgv-recall">—</strong><span>MGV recall</span></div></article>
+      </section>
+
+      <section class="page" id="page-window-lab">
+        <div class="page-heading"><div><div class="eyebrow">INTERACTIVE DEMONSTRATION</div><h1>Analyze a 100-gap window.</h1><p class="lead">Inspect the model prediction beside descriptive statistics for the same input.</p></div><div class="range-pill"><span class="range-dot"></span>Observed model support <strong>233–9.9999 × 10<sup>11</sup></strong></div></div>
+        <div class="notice notice-amber"><span class="notice-icon">!</span><div><strong>Input integrity</strong><p>Provide exactly 100 positive integer gaps and their midpoint prime. Within the model’s observed range, the app reconstructs and checks all 101 implied primes and verifies that no prime is skipped.</p></div></div>
+        <div class="lab-grid">
+          <article class="panel-card input-card">
+            <div class="card-heading"><div><div class="eyebrow">WINDOW INPUT</div><h2>Prime-gap sample</h2></div><button type="button" class="outline-button" id="load-example">Load demo window</button></div>
+            <label class="field-label" for="p-mid">Midpoint prime (p_mid)</label>
+            <input id="p-mid" class="text-input" inputmode="numeric" type="number" min="233" max="999989121671" value="233">
+            <div class="field-label field-label-row"><label for="gap-values">100 consecutive gap values</label><span id="gap-count" class="count-pill">0 / 100</span></div>
+            <textarea id="gap-values" class="gap-input" spellcheck="false" placeholder="Paste 100 positive integer gaps, separated by commas or spaces"></textarea>
+            <div class="input-footnote" id="example-source">Loading the reproducible example…</div>
+            <button type="button" class="primary-button" id="classify-button"><span>Classify this window</span><span>→</span></button>
+            <div id="lab-error" class="form-error" role="alert"></div>
+          </article>
+          <article class="panel-card results-card">
+            <div class="card-heading"><div><div class="eyebrow">MODEL OUTPUT</div><h2>Window result</h2></div><span class="research-tag">RESEARCH ONLY</span></div>
+            <div id="empty-result" class="empty-state"><div class="empty-mark">∿</div><strong>Ready for analysis</strong><p>Load the demo window or enter an in-support sample to see the model’s class probabilities and descriptive measures.</p></div>
+            <div id="classification-result" class="classification-result hidden"></div>
+          </article>
+        </div>
+        <article class="panel-card result-note"><span class="note-icon">i</span><p>The model predicts CC, MA, MGV, or NONE using the adviser/classical four-class track. The prediction is not the analytical label rule, not a primality certificate, and not a cryptographic approval.</p></article>
+      </section>
+
+      <section class="page" id="page-model-results">
+        <div class="page-heading"><div><div class="eyebrow">WEIGHTED FIVE-FOLD EVALUATION</div><h1>Compare models and label tracks.</h1><p class="lead">Results use a spatially grouped split with a two-window purge. The evaluation uses a weighted sample, not every possible window.</p></div><div class="range-pill">Evaluation sample <strong id="evaluation-size-pill">— rows</strong></div></div>
+        <div class="panel-card table-card"><div class="card-heading"><div><div class="eyebrow">PERFORMANCE SUMMARY</div><h2>Model comparison</h2></div><span class="table-note">All values are fold means</span></div>
+          <div class="table-wrap"><table><thead><tr><th>Label track</th><th>Model</th><th>Accuracy</th><th>Macro-F1</th><th>Balanced accuracy</th><th>MGV precision</th><th>MGV recall</th></tr></thead><tbody id="model-table-body"><tr><td colspan="7">Loading comparison records…</td></tr></tbody></table></div>
+          <div class="table-footnote">MGV support is small, and MGV precision is shown as a raw class metric. Scores do not establish usefulness for key generation.</div>
+        </div>
+        <div class="content-grid two-evidence-grid"><article class="panel-card"><div class="eyebrow">RARE-CLASS CHECK</div><h2>MGV result</h2><div class="rare-metric-row"><div><strong id="mgv-precision-detail">—</strong><span>Precision</span></div><div><strong id="mgv-recall-detail">—</strong><span>Recall</span></div><div><strong id="mgv-support-detail">—</strong><span>Mean fold support</span></div></div><p class="small-note">Support shown is the average per test fold; 485 MGV windows were retained in the full model sample. A chronological holdout was skipped because the final range segment had no MGV examples.</p></article>
+          <article class="panel-card"><div class="eyebrow">EXPLAINABILITY</div><h2>Top global SHAP features</h2><p class="small-note">Mean absolute SHAP values on a 2,048-row explanation sample. This describes model behavior; it does not establish causation.</p><div id="shap-bars" class="shap-bars"></div></article></div>
+      </section>
+
+      <section class="page" id="page-crypto-boundary">
+        <div class="page-heading"><div><div class="eyebrow">CRYPTOGRAPHIC BASELINES</div><h1>Performance is measured; security is not inferred.</h1><p class="lead">Baseline timings provide context for key generation. They do not compare PGI security against standard cryptography.</p></div><div class="range-pill warning-pill"><span class="range-dot"></span>PGI strict 2048-bit <strong id="strict-status">—</strong></div></div>
+        <div class="notice notice-red"><span class="notice-icon">!</span><div><strong>PGI key generation is outside the validated range</strong><p id="strict-reason">Loading the recorded scope check…</p></div></div>
+        <div class="panel-card table-card"><div class="card-heading"><div><div class="eyebrow">STANDARD BASELINE TIMING</div><h2>Key-generation benchmarks</h2></div><span class="table-note" id="trial-note">—</span></div>
+          <div class="table-wrap"><table><thead><tr><th>Algorithm</th><th>Key size</th><th>Trials</th><th>Mean time</th><th>Median time</th><th>95th percentile</th></tr></thead><tbody id="crypto-table-body"><tr><td colspan="6">Loading benchmark records…</td></tr></tbody></table></div>
+          <div class="table-footnote">These are timing baselines. The recorded entropy values are descriptive, not cryptographic entropy estimates; factorization effort shown in the source is theoretical, not a factorization trial.</div>
+        </div>
+        <div class="panel-card standards-card"><div class="standards-mark">§</div><div><div class="eyebrow">IMPLEMENTATION BOUNDARY</div><h2>The standard key-generation path remains separate.</h2><p>PGI’s research model does not replace an approved random bit generator, prime-generation method, primality validation, or cryptographic review. No new-model PGI RSA keys were generated in the reported work.</p></div></div>
+      </section>
+
+      <section class="page" id="page-methods">
+        <div class="page-heading"><div><div class="eyebrow">REPRODUCIBLE STUDY</div><h1>Methods, scope, and evidence.</h1><p class="lead">The presentation is built from the project’s saved result files and bundled model artifact.</p></div><div class="range-pill">Model artifact <strong id="model-file-label">—</strong></div></div>
+        <div class="method-grid">
+          <article class="panel-card method-card"><div class="method-index">01</div><div class="eyebrow">DATA</div><h2>Full prime-gap stream</h2><p>Consecutive prime gaps were generated through the inclusive limit of 10<sup>12</sup>, with stored checkpoint validation and a recorded SHA-256 digest.</p><div class="method-detail" id="method-data-detail">Loading dataset record…</div></article>
+          <article class="panel-card method-card"><div class="method-index">02</div><div class="eyebrow">WINDOWS</div><h2>Overlapping 100-gap windows</h2><p>Windows advance by 50 gaps. Full-range features use a systematic sample; model evaluation uses a smaller nested sample and retains the MGV windows.</p><div class="method-detail" id="method-window-detail">Loading sample sizes…</div></article>
+          <article class="panel-card method-card"><div class="method-index">03</div><div class="eyebrow">MODELS</div><h2>Shared feature contract</h2><p>Random Forest, XGBoost, MLP, and uncalibrated soft voting were compared. The rebuilt XGBoost model consumes 22 features.</p><div class="method-detail" id="method-model-detail">Loading evaluation setup…</div></article>
+          <article class="panel-card method-card"><div class="method-index">04</div><div class="eyebrow">LIMITATIONS</div><h2>Results with their boundaries</h2><p>Rare MGV precision is weak, the complete chronological MGV holdout is unavailable, and cryptographic-size prime behavior is not validated.</p><div class="method-detail">No security superiority, production readiness, or ISO 25010 participant score is claimed.</div></article>
+        </div>
+        <article class="panel-card artifact-card"><div><div class="eyebrow">BUNDLED MODEL</div><h2>Integrity and provenance</h2><p>Prediction uses the saved four-class adviser model with a SHA-256 check before inference.</p></div><div class="artifact-hash"><span>SHA-256</span><code id="model-hash">—</code></div></article>
+      </section>
+
+      <footer class="footer"><span>PGI-Crypto Research System · local presentation build</span><span>Classifications are empirical outputs, not key-safety decisions.</span></footer>
+    </main>
+  </div>
+</body>
+</html>

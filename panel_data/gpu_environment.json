@@ -1,0 +1,31 @@
+{
+  "xgboost_version": "3.2.0",
+  "numpy_version": "2.4.6",
+  "nvidia_smi_exit": 0,
+  "nvidia_smi": "NVIDIA GeForce RTX 4050 Laptop GPU, 6141 MiB, 617.42",
+  "cupy_version": "14.2.0",
+  "cuda_device_count": 1,
+  "cuda_device_name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+  "cupy_kernel_check": true,
+  "cupy_error": null,
+  "xgboost_cuda_fit": true,
+  "xgboost_cuda_error": null,
+  "booster_device": "{\"learner\":{\"generic_param\":{\"device\":\"cuda:0\",\"fail_on_invalid_gpu_id\":\"0\",\"n_jobs\":\"2\",\"nthread\":\"2\",\"random_state\":\"0\",\"seed\":\"0\",\"seed_per_iteration\":\"0\",\"validate_parameters\":\"1\"},\"gradient_booster\":{\"gbtree_model_param\":{\"num_parallel_tree\":\"1\",\"num_trees\":\"2\"},\"gbtree_train_param\":{\"process_type\":\"default\",\"tree_method\":\"hist\",\"updater\":\"grow_gpu_hist\",\"updater_seq\":\"grow_gpu_hist\"},\"name\":\"gbtree\",\"specified_updater\":false,\"tree_train_param\":{\"alpha\":\"0\",\"colsample_bylevel\":\"1\",\"colsample_bynode\":\"1\",\"colsample_bytree\":\"1\",\"eta\":\"0.300000012\",\"gamma\":\"0\",\"grow_policy\":\"depthwise\",\"interaction_constraints\":\"\",\"lambda\":\"1\",\"learning_rate\":\"0.300000012\",\"max_bin\":\"256\",\"max_cat_threshold\":\"64\",\"max_cat_to_onehot\":\"4\",\"max_delta_step\":\"0\",\"max_depth\":\"2\",\"max_leaves\":\"0\",\"min_child_weight\":\"1\",\"min_split_loss\":\"0\",\"monotone_constraints\":\"()\",\"refresh_leaf\":\"1\",\"reg_alpha\":\"0\",\"reg_lambda\":\"1\",\"sampling_method\":\"uniform\",\"sparse_threshold\":\"0.20000000000000001\",\"subsample\":\"1\"},\"updater\":[{\"hist_train_param\":{\"debug_synchronize\":\"0\",\"max_cached_hist_node\":\"18446744073709551615\"},\"name\":\"grow_gpu_hist\"}]},\"learner_model_param\":{\"base_score\":\"[5.2734375E-1]\",\"boost_from_average\":\"1\",\"num_class\":\"0\",\"num_feature\":\"2\",\"num_target\":\"1\"},\"learner_train_param\":{\"booster\":\"gbtree\",\"disable_default_eval_metric\":\"0\",\"multi_strategy\":\"one_output_per_tree\",\"objective\":\"binary:logistic\"},\"metrics\":[{\"name\":\"logloss\"}],\"objective\":{\"name\":\"binary:logistic\",\"reg_loss_param\":{\"scale_pos_weight\":\"1\"}}},\"version\":[3,2,0]}",
+  "cupy_distribution": "cupy-cuda12x[ctk]==14.2.0",
+  "cuda_toolkit_pip": "12.9.2.0",
+  "cuda_runtime_api_version": 12090,
+  "cuda_driver_api_version": 13040,
+  "cupy_gpu_kernel_sum_squares_1_to_1000": 333833500.0,
+  "nvidia_cuda_packages": {
+    "nvidia-cublas-cu12": "12.9.2.10",
+    "nvidia-cuda-runtime-cu12": "12.9.79",
+    "nvidia-cuda-nvrtc-cu12": "12.9.86",
+    "nvidia-cufft-cu12": "11.4.1.4",
+    "nvidia-curand-cu12": "10.3.10.19",
+    "nvidia-cusolver-cu12": "11.7.5.82",
+    "nvidia-cusparse-cu12": "12.5.10.65",
+    "nvidia-nvjitlink-cu12": "12.9.86"
+  },
+  "cupy_warning_note": "CuPy warned that CUDA_PATH could not be detected; this did not prevent device discovery or the GPU kernel check. CUDA_PATH is not set.",
+  "cupy_gpu_kernel_expected_sum_squares_1_to_1000": 333833500
+}

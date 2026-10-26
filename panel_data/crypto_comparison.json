@@ -1,0 +1,134 @@
+{
+  "benchmark_type": "key-pair generation; private keys discarded after measurements",
+  "trials_per_available_baseline": 1000,
+  "cryptography_version": "50.0.2",
+  "python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "binary_modulus_entropy_note": "descriptive bit-frequency statistic; not a cryptographic entropy estimate",
+  "pollard_rho_note": "log2 expectation is theoretical and not a 100-run factorization experiment",
+  "results": [
+    {
+      "algorithm": "RSA-2048",
+      "key_size_bits": 2048,
+      "trials": 1000,
+      "mean_seconds": 0.13609311540075578,
+      "median_seconds": 0.11944475001655519,
+      "p95_seconds": 0.28928369999630377,
+      "min_seconds": 0.017421399999875575,
+      "max_seconds": 0.5737099999678321,
+      "mean_modulus_bit_frequency_entropy_bits_per_bit": 0.9996487291531415,
+      "pollard_rho_expected_steps_log2_theoretical": 512.3257480647361,
+      "miller_rabin_rounds_for_2^-128_bound": 64,
+      "actual_openssl_miller_rabin_rounds": "not exposed by cryptography API",
+      "cc_window_hit_rate": null,
+      "cc_rate_note": "not measured; the rebuilt gap classifier is trained through p_mid <= 10^12, still far below RSA prime size"
+    },
+    {
+      "algorithm": "RSA-4096",
+      "key_size_bits": 4096,
+      "trials": 1000,
+      "mean_seconds": 20.921538543800242,
+      "median_seconds": 1.1350902000267524,
+      "p95_seconds": 2.8762774999486282,
+      "min_seconds": 0.09114070003852248,
+      "max_seconds": 19623.739776299975,
+      "mean_modulus_bit_frequency_entropy_bits_per_bit": 0.9998192275854192,
+      "pollard_rho_expected_steps_log2_theoretical": 1024.3257480647362,
+      "miller_rabin_rounds_for_2^-128_bound": 64,
+      "actual_openssl_miller_rabin_rounds": "not exposed by cryptography API",
+      "cc_window_hit_rate": null,
+      "cc_rate_note": "not measured; the rebuilt gap classifier is trained through p_mid <= 10^12, still far below RSA prime size"
+    },
+    {
+      "algorithm": "DH-2048",
+      "key_size_bits": 2048,
+      "parameter_setup_seconds_once": 21.556061500043143,
+      "parameter_generation_included_in_trial_time": false,
+      "trials": 1000,
+      "mean_seconds": 0.0018965601999661886,
+      "median_seconds": 0.0018102499889209867,
+      "p95_seconds": 0.0023742999765090644,
+      "min_seconds": 0.0014473000192083418,
+      "max_seconds": 0.010224300029221922,
+      "mean_modulus_bit_frequency_entropy_bits_per_bit": null,
+      "pollard_rho_expected_steps_log2_theoretical": null,
+      "miller_rabin_rounds_for_2^-128_bound": 64,
+      "actual_openssl_miller_rabin_rounds": "not exposed by cryptography API",
+      "cc_window_hit_rate": null,
+      "cc_rate_note": "not measured; the rebuilt gap classifier is trained through p_mid <= 10^12, still far below RSA prime size"
+    },
+    {
+      "algorithm": "ECC-P-256",
+      "key_size_bits": 256,
+      "trials": 1000,
+      "mean_seconds": 2.546030003577471e-05,
+      "median_seconds": 1.3199984095990658e-05,
+      "p95_seconds": 1.5300000086426735e-05,
+      "min_seconds": 1.1599971912801266e-05,
+      "max_seconds": 0.012095000012777746,
+      "mean_modulus_bit_frequency_entropy_bits_per_bit": null,
+      "pollard_rho_expected_steps_log2_theoretical": null,
+      "miller_rabin_rounds_for_2^-128_bound": null,
+      "actual_openssl_miller_rabin_rounds": "not applicable",
+      "cc_window_hit_rate": null,
+      "cc_rate_note": "not applicable to elliptic-curve key generation"
+    },
+    {
+      "algorithm": "PGI-Crypto-strict-2048",
+      "requested_trials": 1000,
+      "completed_key_pairs": 0,
+      "status": "blocked_outside_validated_range",
+      "error_type": "OutsideValidatedRangeError",
+      "reason": "policy 'strict_spec' requires the validated range (p_mid <= 10^12 (newly trained range-spanning model support)) but 1024-bit primes reach 1025 bits",
+      "cc_window_hit_rate": null,
+      "cc_rate_note": "undefined: strict policy refuses 1024-bit candidate primes because the rebuilt model support ends at 10^12"
+    }
+  ],
+  "trial_records_csv": "results/benchmarks/full_1e12_crypto_comparison_trials.csv",
+  "private_key_material_persisted": false,
+  "trial_outlier_audit": {
+    "DH-2048": {
+      "trials": 1000,
+      "median_seconds": 0.0018102499889209867,
+      "p95_seconds": 0.0023742999765090644,
+      "rule": "flag trial if elapsed time is greater than 10 times this algorithm median",
+      "flagged_trials": [],
+      "interpretation": "No trials exceeded the descriptive 10x-median flag."
+    },
+    "ECC-P-256": {
+      "trials": 1000,
+      "median_seconds": 1.3199984095990658e-05,
+      "p95_seconds": 1.5300000086426735e-05,
+      "rule": "flag trial if elapsed time is greater than 10 times this algorithm median",
+      "flagged_trials": [
+        {
+          "trial": 1,
+          "elapsed_seconds": 0.012095000012777746
+        }
+      ],
+      "interpretation": "A flagged timing is retained in raw results; investigate before using the arithmetic mean as a typical latency."
+    },
+    "RSA-2048": {
+      "trials": 1000,
+      "median_seconds": 0.11944475001655519,
+      "p95_seconds": 0.28928369999630377,
+      "rule": "flag trial if elapsed time is greater than 10 times this algorithm median",
+      "flagged_trials": [],
+      "interpretation": "No trials exceeded the descriptive 10x-median flag."
+    },
+    "RSA-4096": {
+      "trials": 1000,
+      "median_seconds": 1.1350902000267524,
+      "p95_seconds": 2.8762774999486282,
+      "rule": "flag trial if elapsed time is greater than 10 times this algorithm median",
+      "flagged_trials": [
+        {
+          "trial": 934,
+          "elapsed_seconds": 19623.739776299975
+        }
+      ],
+      "interpretation": "A flagged timing is retained in raw results; investigate before using the arithmetic mean as a typical latency."
+    }
+  },
+  "rsa4096_timing_note": "One RSA-4096 trial is an extreme latency outlier; the raw time is preserved. Report the median and p95 with the mean and investigate the flagged observation; its cause was not measured."
+}

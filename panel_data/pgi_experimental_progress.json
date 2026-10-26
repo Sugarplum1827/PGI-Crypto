@@ -1,0 +1,17 @@
+{
+  "policy": "experimental_rule_gate",
+  "requested_trials": 1000,
+  "completed_trials": 1000,
+  "successful_key_pairs": 1000,
+  "statuses": {
+    "success": 1000
+  },
+  "blocked_before_candidate_generation": 0,
+  "mean_seconds_completed": 24.891688186600746,
+  "median_request_or_generation_seconds": 21.07349989999784,
+  "p95_request_or_generation_seconds": 50.39366040000459,
+  "max_attempts_per_trial": 8,
+  "model_sha256": "407af53240a685d0c7ae7bea78b3101f23ee2b90ed8e5dad3dcac5da2d22cbc9",
+  "model_track": "label_adviser_classical_4class",
+  "private_key_material_persisted": false
+}

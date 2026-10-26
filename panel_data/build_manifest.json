@@ -1,0 +1,9 @@
+{
+  "raw_gap_stream_sha256": "5f517070df35881a392be0791d03b4b9c6d576771f5e9709544f9a11855ff791",
+  "feature_sample_sha256": "4ce9f3dbc81154efa2a5872ad630677b3e1a5eef6900ce01c9afcf213e957004",
+  "model_sample_sha256": "d921a95b70c07897eff50f56ec5e9e48b2a8306e2e45fbeb77e3e5dce02ae118",
+  "model_sha256": "407af53240a685d0c7ae7bea78b3101f23ee2b90ed8e5dad3dcac5da2d22cbc9",
+  "experimental_trials": 1000,
+  "strict_requests": 1000,
+  "private_key_material_persisted": false
+}

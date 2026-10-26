@@ -1,0 +1,88 @@
+{
+  "gap_file": "D:\\PGICRYPTO\\rebuild_from_scratch_20261025\\data\\raw\\prime_gaps_1e12.u16",
+  "feature_file": "D:\\PGICRYPTO\\rebuild_from_scratch_20261025\\data\\processed\\windows_1e12_sample2000.parquet",
+  "window_gaps": 100,
+  "stride": 50,
+  "windows": 752158239,
+  "features": [
+    "mean_gap",
+    "std_dev",
+    "skewness",
+    "excess_kurtosis",
+    "autocorr_lag1",
+    "autocorr_lag2",
+    "autocorr_lag3",
+    "autocorr_lag4",
+    "autocorr_lag5",
+    "twin_prime_density",
+    "gap_entropy",
+    "interquartile_range",
+    "max_gap_ratio",
+    "min_gap",
+    "max_gap",
+    "gap_range",
+    "cv_coeff_variation",
+    "prop_even_gt_2logp",
+    "median_gap",
+    "poisson_lambda_fit",
+    "gap_freq_mode",
+    "large_gap_fraction",
+    "log_mean_gap",
+    "CR_log2_legacy_DO_NOT_USE_FOR_CLASSIFICATION"
+  ],
+  "maximal_gap_record_count": 50,
+  "mgv_radius": 5,
+  "mgv_window_count": 485,
+  "labels": {
+    "label_thesis_3class": {
+      "MA": 376079,
+      "MGV": 485
+    },
+    "label_audited_4class": {
+      "CC": 276539,
+      "MA": 5733,
+      "MGV": 485,
+      "NONE": 93807
+    },
+    "label_adviser_classical_4class": {
+      "CC": 277497,
+      "MA": 5733,
+      "MGV": 485,
+      "NONE": 92849
+    }
+  },
+  "legacy_unsorted_poisson_audit_computed": false,
+  "feature_backend": "cuda",
+  "feature_backend_fallback_reason": null,
+  "method_versions": [
+    "thesis_literal",
+    "audited_pvalue",
+    "adviser_classical_D_0.136"
+  ],
+  "rows_written": 376564,
+  "sampled_from_full_range": true,
+  "sample_modulus": 2000,
+  "sample_phase": 1211,
+  "sample_design": "random-phase systematic sample plus all MGV windows",
+  "sample_weight_note": "all retained MGV windows weight=1; systematic non-MGV rows use an expansion weight calibrated so all sample weights sum to the exact window population",
+  "background_expansion_weight": 1999.9993458821152,
+  "weighted_label_counts": {
+    "label_thesis_3class": {
+      "MA": 752157753.9999998,
+      "MGV": 485.0
+    },
+    "label_audited_4class": {
+      "CC": 553077819.1108941,
+      "MA": 11465996.249942169,
+      "MGV": 485.0,
+      "NONE": 187613938.63916364
+    },
+    "label_adviser_classical_4class": {
+      "CC": 554993818.4842494,
+      "MA": 11465996.249942169,
+      "MGV": 485.0,
+      "NONE": 185697939.26580852
+    }
+  },
+  "feature_file_sha256": "4ce9f3dbc81154efa2a5872ad630677b3e1a5eef6900ce01c9afcf213e957004"
+}

@@ -1,0 +1,50 @@
+{
+  "limit": 1000000000000,
+  "prime_count": 37607912018,
+  "gap_count": 37607912017,
+  "first_gap": 1,
+  "last_prime": 999999999989,
+  "min_gap": 1,
+  "max_gap": 540,
+  "bytes": 75215824034,
+  "sha256": "5f517070df35881a392be0791d03b4b9c6d576771f5e9709544f9a11855ff791",
+  "checkpoints_verified": [
+    1000000,
+    10000000,
+    100000000,
+    1000000000,
+    10000000000,
+    100000000000,
+    1000000000000
+  ],
+  "generator_state": {
+    "next_segment": 119210,
+    "prime_count": 37607912018,
+    "last_prime": 999999999989,
+    "gap_count": 37607912017,
+    "limit": 1000000000000,
+    "segment_odds": 4194304
+  },
+  "global_gap_eda": {
+    "gap_count": 37607912017,
+    "mean_gap": 26.590149422147324,
+    "population_std_gap": 23.865785126847616,
+    "nearest_rank_quantiles": {
+      "p25": 10,
+      "p50": 20,
+      "p75": 36,
+      "p90": 58,
+      "p95": 74,
+      "p99": 112
+    },
+    "min_gap": 1,
+    "max_gap": 540,
+    "distinct_gap_sizes": 255,
+    "gap_size_entropy_bits": 5.036989036453412,
+    "twin_prime_gap_fraction": 0.049739140507306934,
+    "odd_gap_fraction": 2.6590149422492997e-11,
+    "histogram_file": "D:\\PGICRYPTO\\rebuild_from_scratch_20261025\\data\\raw\\prime_gap_histogram_1e12.csv"
+  },
+  "hdf5_copy": "not created; raw stream is the canonical full-scale dataset",
+  "elapsed_seconds": 810.1067723000306
+}
