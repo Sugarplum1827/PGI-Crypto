@@ -62,7 +62,7 @@ def _panel_summary() -> dict:
             "p95_seconds": row.get("p95_seconds"),
         }
         for row in crypto.get("results", [])
-        if row.get("algorithm") in {"RSA-2048", "RSA-4096", "DH-2048", "ECC-P-256"}
+        if row.get("algorithm") in {"RSA-2048", "DH-2048"}
     ]
 
     shap_items = list(zip(shap.get("features", []), shap.get("mean_absolute_shap", [])))

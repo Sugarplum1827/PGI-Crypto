@@ -4,7 +4,10 @@ from __future__ import annotations
 import io
 import importlib.util
 import json
+import os
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import altair as alt
@@ -155,6 +158,142 @@ def show_main_header() -> None:
         '<div class="app-subtitle">Prime Gap Classification &amp; Cryptographic Key Generation</div>',
         unsafe_allow_html=True,
     )
+
+
+DEFAULT_TERMINAL_SOURCE = '''from pgi_crypto import PGICryptoKeyGenerator, POLICY_EXPERIMENTAL, serialize_public_key
+from pgi_crypto.config import RNG_MODE_SECURE
+from pgi_crypto import serialize_private_key
+import json
+from importlib.resources import files
+from pgi_crypto import PGICryptoResearchSystem
+
+demo_file = files("pgi_crypto").joinpath("panel_data", "demo_window.json")
+demo = json.loads(demo_file.read_text(encoding="utf-8"))
+
+system = PGICryptoResearchSystem()  # verifies the bundled model checksum
+result = system.classify_window(
+    gaps=demo["gaps"],
+    p_mid=int(demo["p_mid"]),
+)
+
+print("Regime:", result["predicted_label"])
+print("Probabilities:", result["probabilities"])
+print("Window:", result["window"])
+print("Prime-sequence check:", result["sequence_validation"]["status"])
+
+generator = PGICryptoKeyGenerator()
+result = generator.generate(
+    modulus_bits=2048,
+    policy=POLICY_EXPERIMENTAL,
+    rng_mode=RNG_MODE_SECURE,
+    max_attempts=8,
+    validate=True,
+)
+
+print("Generated PGICrypto public key (PEM):")
+print(serialize_public_key(result).decode("ascii"))
+print("Generation summary:", result.redacted_info())
+private_pem = serialize_private_key(result, unencrypted=True)
+print("Private key (unencrypted PKCS#8 PEM):")
+print(private_pem.decode("ascii"))
+'''
+
+TERMINAL_SOURCE_VERSION = "rsa-pss-hello-world-v1"
+
+
+def run_terminal_source(source: str, timeout_seconds: int = 120) -> tuple[int | None, str, bool]:
+    """Run user-entered Python in a separate local process and return its output."""
+    if not source.strip():
+        return 1, "Enter Python code before running it.", False
+    if len(source) > 50_000:
+        return 1, "The code is too long to run here (limit: 50,000 characters).", False
+
+    environment = os.environ.copy()
+    existing_pythonpath = environment.get("PYTHONPATH", "")
+    python_paths = [str(SOURCE_ROOT)]
+    if existing_pythonpath:
+        python_paths.append(existing_pythonpath)
+    environment["PYTHONPATH"] = os.pathsep.join(python_paths)
+
+    output_limit = 200_000
+    with tempfile.TemporaryFile(mode="w+t", encoding="utf-8", errors="replace") as output:
+        try:
+            completed = subprocess.run(
+                [sys.executable, "-u", "-c", source],
+                cwd=PROJECT_ROOT,
+                env=environment,
+                stdout=output,
+                stderr=subprocess.STDOUT,
+                text=True,
+                timeout=timeout_seconds,
+                check=False,
+            )
+            return_code = completed.returncode
+            timed_out = False
+        except subprocess.TimeoutExpired:
+            return_code = None
+            timed_out = True
+
+        output.seek(0)
+        text = output.read(output_limit + 1)
+        truncated = len(text) > output_limit
+        if truncated:
+            text = text[:output_limit] + "\n\n[Output truncated at 200,000 characters.]"
+        if timed_out:
+            text += f"\n\n[Stopped after {timeout_seconds} seconds.]"
+        return return_code, text or "(The program produced no output.)", truncated or timed_out
+
+
+def draw_terminal_tab() -> None:
+    # Refresh the editor once when the bundled starter example changes, while
+    # preserving edits the user makes during subsequent Streamlit reruns.
+    if st.session_state.get("terminal_source_version") != TERMINAL_SOURCE_VERSION:
+        st.session_state["terminal_source"] = DEFAULT_TERMINAL_SOURCE
+        st.session_state["terminal_source_version"] = TERMINAL_SOURCE_VERSION
+        st.session_state.pop("terminal_result", None)
+
+    st.subheader("Python Terminal")
+    st.caption("Write or paste Python code, run it locally, and read its output here.")
+    st.warning(
+        "Code runs with this computer user's permissions and can access local files. Run only code you trust. "
+        "Runs stop automatically after 120 seconds."
+    )
+    editor, output_panel = st.columns([1, 1], gap="medium")
+    with editor:
+        with st.container(border=True):
+            st.markdown("**Python code**")
+            source = st.text_area(
+                "Python code",
+                value=DEFAULT_TERMINAL_SOURCE,
+                height=500,
+                key="terminal_source",
+                label_visibility="collapsed",
+            )
+            run_clicked = st.button("Run code", type="primary", width="stretch", key="run_terminal_code")
+    with output_panel:
+        with st.container(border=True):
+            st.markdown("**Output**")
+            if st.button("Clear output", key="clear_terminal_output"):
+                st.session_state.pop("terminal_result", None)
+            if run_clicked:
+                with st.spinner("Running Python code…"):
+                    return_code, output, limited = run_terminal_source(source)
+                st.session_state["terminal_result"] = {
+                    "return_code": return_code,
+                    "output": output,
+                    "limited": limited,
+                }
+            result = st.session_state.get("terminal_result")
+            if result:
+                if result["return_code"] == 0:
+                    st.success("Finished successfully.")
+                elif result["return_code"] is None:
+                    st.error("The program reached its time limit.")
+                else:
+                    st.error(f"The program exited with code {result['return_code']}.")
+                st.code(result["output"], language="text", wrap_lines=False)
+            else:
+                st.info("Run the example or enter your own Python code to see output.")
 
 
 def summarize_dataframe(df: pd.DataFrame) -> pd.DataFrame:
@@ -421,7 +560,10 @@ def draw_data_tab(default_feature_df: pd.DataFrame | None, dataset_meta: dict) -
                 trend = make_trend(df)
                 if trend is not None:
                     st.area_chart(trend, color="#596575", height=240, width="stretch")
-                    st.caption("Mean gap by ordered midpoint-prime range in the sampled data.")
+                    st.caption(
+                        "Each point shows the average of the 100 gaps in windows grouped by midpoint-prime range. "
+                        "It shows how the average gap changes across the sampled prime range; it is not a plot of individual gaps."
+                    )
                 else:
                     st.info("This table needs p_mid and mean_gap columns to draw the trend.")
         with chart_right:
@@ -430,6 +572,10 @@ def draw_data_tab(default_feature_df: pd.DataFrame | None, dataset_meta: dict) -
                 heatmap = make_heatmap(df)
                 if heatmap is not None:
                     st.altair_chart(heatmap, width="stretch")
+                    st.caption(
+                        "Color shows the correlation between each pair of selected window features "
+                        "(−1 to +1). The heatmap summarizes association in the sample; correlation does not show cause."
+                    )
                 else:
                     st.info("Upload or select a feature table with at least two numeric feature columns.")
     if dataset_meta:
@@ -555,7 +701,11 @@ def draw_classification_tab(eval_df: pd.DataFrame | None, summary: dict, demo: d
                 tooltip=["Model", "Metric", alt.Tooltip("Score:Q", format=".3f")],
             ).properties(height=260)
             st.altair_chart(chart, width="stretch")
-            st.caption("Five-fold spatially grouped metrics; weighted sample, two-window purge. The uncalibrated soft-voting ensemble's macro-F1 is about 0.544.")
+            st.caption(
+                "Bars compare the models' weighted mean scores across five spatially grouped folds; "
+                "higher is better for these three metrics. A two-window purge reduces overlap between train and test sets. "
+                "These fold means do not establish performance on unseen prime ranges."
+            )
         else:
             st.info("Saved model comparison metrics were not found.")
 
@@ -639,6 +789,10 @@ def draw_shap_tab(eval_df: pd.DataFrame | None, shap_summary: dict, demo: dict) 
                     tooltip=["Feature", "Selected window value", "Local SHAP impact", "Global mean |SHAP|"],
                 ).properties(height=360)
                 st.altair_chart(chart, width="stretch")
+                st.caption(
+                    f"For the selected window, bars show each feature's signed contribution to the predicted {selected_class} score. "
+                    "Values on opposite sides of zero push the model output in different directions; they do not show causal effects."
+                )
                 st.dataframe(global_df.head(20), width="stretch", hide_index=True)
             elif not global_df.empty:
                 global_df = global_df.sort_values("Global mean |SHAP|", ascending=False).head(12)
@@ -650,8 +804,12 @@ def draw_shap_tab(eval_df: pd.DataFrame | None, shap_summary: dict, demo: dict) 
                     ).properties(height=360),
                     width="stretch",
                 )
+                st.caption(
+                    f"Features are ranked by average absolute SHAP value over {shap_summary.get('data_rows_explained', 0):,} sampled rows. "
+                    "Larger values indicate greater influence on model outputs in this sample, not causation or security value."
+                )
                 st.dataframe(global_df, width="stretch", hide_index=True)
-                st.caption(f"Saved global SHAP summary over {shap_summary.get('data_rows_explained', 0):,} sampled rows. Run SHAP Analysis for the selected window's local values.")
+                st.caption("Run SHAP Analysis to view signed feature contributions for the selected window.")
             else:
                 st.info("No SHAP summary is bundled with this project copy.")
 
@@ -740,7 +898,7 @@ def draw_pgi_tab(crypto: dict, manifest: dict, pgi_progress: dict) -> None:
             results = crypto.get("results", [])
             rows = []
             for item in results:
-                if item.get("algorithm") in {"RSA-2048", "RSA-4096", "DH-2048", "ECC-P-256"}:
+                if item.get("algorithm") in {"RSA-2048", "DH-2048"}:
                     rows.append({
                         "Algorithm": item.get("algorithm"),
                         "Trials": item.get("trials"),
@@ -768,7 +926,7 @@ def draw_pgi_tab(crypto: dict, manifest: dict, pgi_progress: dict) -> None:
 
 def main() -> None:
     show_main_header()
-    tabs = st.tabs(["Data", "Classification", "SHAP", "PGI-Crypto"])
+    tabs = st.tabs(["Data", "Classification", "SHAP", "PGI-Crypto", "Terminal"])
     dataset_meta = json_record("dataset_summary.json", "data/raw/prime_gaps_1e12.u16.meta.json")
     model_summary = json_record("model_comparison_summary.json", "results/metrics/full_1e12/model_comparison_summary.json")
     shap_summary = json_record("shap_global.json", "results/metrics/full_1e12/shap_adviser_classical_4class_global.json")
@@ -788,6 +946,8 @@ def main() -> None:
         draw_shap_tab(evaluation_df, shap_summary, demo)
     with tabs[3]:
         draw_pgi_tab(crypto_summary, model_manifest, pgi_progress)
+    with tabs[4]:
+        draw_terminal_tab()
 
     st.markdown("<hr style='margin-top:2rem;border-color:#263349'>", unsafe_allow_html=True)
     st.markdown(
@@ -798,4 +958,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
